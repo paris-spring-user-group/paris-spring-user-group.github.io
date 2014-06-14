@@ -55,15 +55,36 @@ new AnnotationConfigApplicationContext(SpringMeetupParis.class)
             </div>
         </div>
 
+	<div id="summerSurvey" class="modal in fade" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Sondage</h3>
+		</div>
+		<div class="modal-body">
+		      	<iframe src="https://docs.google.com/forms/d/1ZEphbejH44Lwwv8PfDlIkac-yIjzIkcLEC3c6E_ohHM/viewform?embedded=true" style="zoom:0.60" width="99.6%" height="600" frameborder="0">
+				<p>Chargement en cours / loading in progress...</p>		
+			</iframe>
+		</div>
+	</div>
+
         <script type="text/javascript">
             (function () {
-                var links = document.querySelectorAll("a[rel='external']");
+                var links = document.querySelectorAll("a[rel='external']"),
+		    closeBtns = document.querySelectorAll("button.close"),
+		    modal = document.querySelector("#summerSurvey");
+
                 for (var i = 0; i < links.length; i++) {
                     var link = links[i];
                     if (link.href.indexOf('http') == 0) {
                         link.setAttribute("target", "_blank");
                     }
                 }
+		for (var i = 0; i < closeBtns.length; i++) {
+		    var btn = closeBtns[i];
+		    btn.onclick = function() {
+			modal.className = modal.className.replace(/(?:^|\s)in(?!\S)/g , 'hide');
+		    }
+		}
             })();
         </script>
     </body>
