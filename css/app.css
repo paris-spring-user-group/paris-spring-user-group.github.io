@@ -12,7 +12,8 @@ p { padding:1em; text-align: justify;}
 .navbar .brand, .navbar .nav > li > a { color:white;}
 .navbar .brand, .navbar .nav > li > a:hover { font-weight: bold;}
 
-.hero-unit { margin-top:8em; background-color:#EDE7DE;}
+#alert { margin-top: 7em; margin-bottom:1.2em; font-size:13pt; line-height:1.6;}
+.hero-unit { background-color:#EDE7DE;}
 .hero-unit blockquote { margin-top:4em; border-left-color:#EDE7DE;}
 .hero-unit pre { font-size:13pt; line-height:1.5em;}
 .hero-unit h1 { color:#387C2C;}
