@@ -1,4 +1,4 @@
-# Paris Spring User Group
+# Spring Meetup Paris
 
 ## Getting started
 
