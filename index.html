@@ -7,26 +7,63 @@
         <meta name="description" content="Spring User Group Paris" />
         <meta name="author" content="Florent Biville" />
 
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
+<!--         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+<!--         <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" /> -->
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-3.1.1.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme-3.1.1.css" />
         <link rel="stylesheet" type="text/css" href="css/app.css" />
+
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/angular.js"></script>
+        <script src="js/lib/bootstrap.js"></script>
+        <script src="js/lib/ui-bootstrap-tpls-0.11.0.js"></script>
+        <script src="js/lib/underscore-min.js"></script>
+
+        <script src="js/app.js"></script>
     </head>
-    <body data-spy="scroll">
-        <div class="container-fluid offset1 span10">
-            <div class="navbar navbar-fixed-top">
-                <div class="navbar-inner" id="meetup-menu">
-                    <a class="brand" href="#sug-overview">
-                        <img src="img/spring-logo.png" alt="Paris Spring User Group" title="" />
-                    </a>
-                    <ul class="nav nav-pills lead">
-                        <li><a title="Twitter" href="https://twitter.com/interface21_ug" rel="external"><i class="nav-icon icon-white icon-retweet"></i> <span class="hidden-phone"> Twitter</span></a></li>
-                        <li><a title="Google Group" href="https://groups.google.com/forum/#!forum/spring-meetup-paris" rel="external"><i class="nav-icon icon-white icon-heart"></i> <span class="hidden-phone">Google Groups</span></a></li>
+    <body data-spy="scroll" ng-app="springMeetupParisApp">
+        <div class="container-fluid col-lg-offset-1 col-sm-10 col-md-10">
+            <div class="navbar navbar-fixed-top navbar-default">
+                <div class="container" id="meetup-menu">
+                	<div class="navbar-header">
+	                    <a class="navbar-brand" href="#sug-overview">
+	                        <img src="img/spring-logo.png" alt="Paris Spring User Group" title="" />
+	                    </a>
+                    </div>
+                    <ul class="nav nav-pills lead navbar-nav">
+                        <li>
+                        	<a title="Twitter" href="https://twitter.com/interface21_ug" rel="external">
+                        		<i class="glyphicon glyphicon-retweet"></i> 
+                        		<span class="hidden-phone"> Twitter</span>
+                        	</a>
+                        </li>
+                        <li>
+                        	<a title="Google Group" href="https://groups.google.com/forum/#!forum/spring-meetup-paris" rel="external">
+                        		<i class="glyphicon glyphicon-heart"></i> 
+                        		<span class="hidden-phone">Google Groups</span>
+                        	</a>
+                        </li>
                     </ul>
                 </div>
             </div>
+	
+			<div id="alert" class="row">
+				<div class="col-lg-offset-1 col-sm-10 col-md-10">
+					<div class="alert alert-warning">
+						<strong>Flash!</strong> Au vu du peu de réponses à ce <a
+							rel="external"
+							href="https://docs.google.com/forms/d/1ZEphbejH44Lwwv8PfDlIkac-yIjzIkcLEC3c6E_ohHM/">sondage</a>,
+						la prochaine session aura lieu en Septembre.<br>Given the too
+						few answers provided to this <a rel="external"
+							href="https://docs.google.com/forms/d/1ZEphbejH44Lwwv8PfDlIkac-yIjzIkcLEC3c6E_ohHM/">survey</a>,
+						the next session will be held in September.
+					</div>
+				</div>
+			</div>
 
-            <div class="row-fluid flash">
-                <div class="hero-unit">
+			<div class="flash row">
+				<div class="jumbotron">
                     <h1>Spring Meetup Paris</h1>
                     <blockquote>
                         <pre>// initialize fun
@@ -37,15 +74,15 @@ new AnnotationConfigApplicationContext(SpringMeetupParis.class)
                 </div>
             </div>
 
-            <div id="sug-overview" class="headline row-fluid"><h2>Motto</h2></div>
-            <div class="row-fluid">
-                <div class="span6">
+            <div id="sug-overview" class="headline row"><h2>Motto</h2></div>
+			<div class="row">
+                <div class="col-sm-6 col-md-6">
                     <p class="lead">
                         Le Spring Meetup Paris rassemble et met en relation les personnes intéressées par les technologies Spring.
                         Venez y partager votre enthousiasme, vos connaissances, vos questions autour de Spring et participer aux conférences organisées.
                     </p>
                 </div>
-                <div class="span6">
+                <div class="col-sm-6 col-md-6">
                     <p class="lead">
                         Spring Meetup Paris allows you to stay in touch with local and global Spring ecosystem actors.
                         Join us to share your enthusiasm, your knowledge and any Spring-related question you might have!
@@ -53,19 +90,47 @@ new AnnotationConfigApplicationContext(SpringMeetupParis.class)
                     </p>
                 </div>
             </div>
+			<div id="sug-next-session" class="headline row"><h2>Prochaine soirée</h2></div>
+            <div class="row">
+            	A venir !
+            </div>
+            <div id="sug-last-session" class="headline row"><h2>Les soirées précédentes</h2></div>
+            <div class="row" ng-controller="ListEventsCtrl">
+            	{{errorListEvent}}
+            	<accordion>
+            		<accordion-group ng-repeat="event in events" is-open="accordionEventStatus.open">
+            			<accordion-heading>
+				            {{event.titre}} le {{event.date}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': accordionEventStatus.open, 'glyphicon-chevron-right': !accordionEventStatus.open}"></i>
+				        </accordion-heading>
+						<div>
+	            			<div>
+		            			<h3>Lieu:</h3>
+	            			</div>
+	            			<div>
+	            				<img ng-src="img/logo/logo-{{event.hote.nom}}.png" alt="{{event.hote.nom}}" width="110px" height="40px"/>
+	            			</div>
+	            			<div>
+			            		{{event.hote.nom}}<br>
+			            		{{event.hote.adresse.rue}}<br>
+			            		{{event.hote.adresse.cp}} {{event.hote.adresse.ville}}<br>
+			            		{{event.hote.adresse.ville}}<br>
+	            			</div>
+	            		</div>
+	            		<br><br>
+	            		<div ng-repeat="theme in event.themes" >
+	            			{{theme.orateur}} {{theme.twitter}}<br>
+	            			<b>{{theme.titre}}</b><br>
+	            			<span ng-if="theme.resume">
+	            			FIXME >
+								<textarea ng-model="theme.resume"></textarea>
+								<br>
+							</span>
+	            			<br>
+	            		</div>
+				    </accordion-group>
+            	</accordion>
+            </div>
         </div>
-
-	<div id="summerSurvey" class="modal in fade" tabindex="-1" role="dialog">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Sondage</h3>
-		</div>
-		<div class="modal-body">
-		      	<iframe src="https://docs.google.com/forms/d/1ZEphbejH44Lwwv8PfDlIkac-yIjzIkcLEC3c6E_ohHM/viewform?embedded=true" style="zoom:0.60" width="99.6%" height="600" frameborder="0">
-				<p>Chargement en cours / loading in progress...</p>		
-			</iframe>
-		</div>
-	</div>
 
         <script type="text/javascript">
             (function () {
