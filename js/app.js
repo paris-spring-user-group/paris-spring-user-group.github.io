@@ -15,8 +15,8 @@ var boSmpController = angular.module('boSmpController', []);
 
 boSmpController.controller('ListEventsCtrl', [ '$scope', '$http', function($scope, $http) {
 	
-//	var boSmpUrl = "http://bo-smp.springmeetupparis.eu.cloudbees.net/"
-	var boSmpUrl = "http://localhost:8080"
+	var boSmpUrl = "http://bo-smp.springmeetupparis.eu.cloudbees.net/"
+//	var boSmpUrl = "http://localhost:8080"
 		
 	$http({ method: "GET", url: boSmpUrl+'/events/listAll', 
 		headers: {
