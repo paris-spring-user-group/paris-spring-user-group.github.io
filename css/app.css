@@ -1,6 +1,12 @@
 body { background-color:#EEE; font-family: Arial, sans-serif; font-size:14pt; color:#666;}
-a { color:#0A96C5;}
-p { padding:1em; text-align: justify;}
+a { color:#0A96C5; text-shadow: none !important;}
+a:active, a:focus, a:hover {
+  outline: 0;
+  border: none;
+  font-weight: normal !important;
+  -moz-outline-style: none;
+}
+p { padding:0.5em; text-align: justify;}
 
 .container-fluid { margin: 0 auto; float: none;}
 .navbar-inner { background: #6DB33F none; height:75px;}
@@ -12,7 +18,8 @@ p { padding:1em; text-align: justify;}
 .navbar .brand, .navbar .nav > li > a:hover { font-weight: bold;}
 
 .hero-unit { margin-top:8em; background-color:#EDE7DE;}
-.hero-unit blockquote { margin-top:4em; border-left-color:#EDE7DE;}
+.hero-unit h2 { margin-top: 1em;}
+.hero-unit blockquote { margin-top: 2em; border-left-color:#EDE7DE;}
 .hero-unit pre { font-size:13pt; line-height:1.5em;}
 .hero-unit h1 { color:#387C2C;}
 
@@ -22,8 +29,7 @@ p { padding:1em; text-align: justify;}
 .lead { font-size:14pt;}
 .inline li { display:inline-block; padding:0 5px 0 5px;}
 
-#external-links { max-width:50%; padding-top:1.3em;}
-#external-links li { max-width:20%;}
+#external-links { padding-top:1.3em;}
 #meetup-menu { margin:0 auto; max-width:50%; text-align:center; overflow:auto; min-width:260px;}
 @media screen and (min-width:550px) {
 	#meetup-menu { max-width:66%;}
